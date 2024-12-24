@@ -1,0 +1,42 @@
+nav a {
+    text-decoration: none; 
+    color: inherit;
+    font-weight: bold;
+}
+
+
+.site-title h1 {
+    font-size: 2rem;
+}
+
+
+.site-title h1 a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0 0.75em;
+}
+
+
+nav li {
+    margin: 0 1em;
+}
+
+
+header {
+    background-color: rgb(197, 197, 197);
+    padding: 0.5em;
+}
