@@ -5,23 +5,25 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState("anonymous");
+  const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
-  const loginAction = async (data) => {
+  const loginAction = async (username, password) => {
     try {
-      const response = await fetch("your-api-endpoint/auth/login", {
+      const response = await fetch("http://127.0.0.1:8000/auth/token/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ "username": username, "password": password }),
       });
       const res = await response.json();
-      if (res.data) {
-        setUser(res.data.user);
-        setToken(res.token);
-        localStorage.setItem("site", res.token);
+      alert(res.auth_token);
+      if (res.auth_token) {
+        console.log(res.data);
+        setUser(username);
+        setToken(res.auth_token);
+        localStorage.setItem("site", res.auth_token);
         navigate("/");
         return;
       }
