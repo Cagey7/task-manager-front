@@ -1,0 +1,38 @@
+.item {
+    background-color: rgb(236, 241, 255);
+    border-radius: 0.625rem;
+    border: 0.1rem solid rgb(160, 170, 199);
+    padding: 1rem;
+
+    word-wrap: break-word; 
+
+}
+
+
+.user-task-header, .user-task-desc {
+    padding-bottom: .5rem;
+}
+
+
+
+.complete-button {
+    padding: 0.5rem 1rem;
+    background-color: #3697ff;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: .5rem;
+}
+
+
+.delete-button {
+    padding: 0.5rem 1rem;
+    background-color: #fa5858;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    cursor: pointer;
+}

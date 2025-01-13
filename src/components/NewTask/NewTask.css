@@ -1,0 +1,63 @@
+.main-new-task-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(236, 241, 255);
+    border-radius: 0.625rem;
+    border: 0.1rem solid rgb(160, 170, 199);
+    margin: 1.25rem auto; 
+    padding: 1rem 0;
+}
+
+
+.task-header-input{
+    width: 95%;
+    padding: 0.625rem;
+    margin-bottom: 1rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+}
+
+
+.task-desc-input{
+    width: 95%;
+    height: 6rem;
+    padding: 0.625rem;
+    margin-bottom: 1rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+  }
+
+
+.task-header-name,
+.task-desc-name {
+    width: 95%;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+
+.new-task-button {
+    padding: 0.625rem 1.25rem;
+    background-color: #3697ff;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+  
+.new-task-button:hover {
+    background-color: #0056b3;
+}
+  
+
+.error-message {
+    color: red; 
+    font-size: 0.875rem;
+    margin-top: 0.625rem;
+}
