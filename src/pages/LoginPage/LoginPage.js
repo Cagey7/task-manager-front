@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from 'react-router-dom';
 import "./LoginPage.css"
 
 function LoginPage() {
     const auth = useAuth();
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     
-    // useEffect(() => {
-    //     if (localStorage.getItem("token")) {
-    //         navigate("/dashboard");
-    //     }
-    // }, [navigate])
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            navigate("/");
+        }
+    }, [navigate])
 
 
     function loginHandler(event) {

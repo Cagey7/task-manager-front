@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./RegisterPage.css"
 
 function RegisterPage() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [error, setError] = useState("");
 
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            navigate("/");
+        }
+    }, [navigate])
 
     function registerHandler(event) {
         const { key, type } = event;
