@@ -39,7 +39,7 @@ function HomePage() {
               />
           ))}
       </div>
-        <h3 class="complete-task-header">Выполненные задания</h3>
+        <h3 className="complete-task-header">Выполненные задания</h3>
         <div className="user-task-list">
           {CompletedTask.map((task, index) => (
               <Task

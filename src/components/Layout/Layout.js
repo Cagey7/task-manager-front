@@ -14,11 +14,17 @@ const Layout = () => {
                   <h1><Link to="/">Таск Менеджер</Link></h1>
               </div>
               <nav>
-                  <ul>
+                  { localStorage.getItem("token") ? (
+                    <ul>
+                      <li><Link to="/profile">{ localStorage.getItem("user") }</Link></li>
+                      <li><Link onClick={() => user.logOut()}>Выйти</Link></li>
+                    </ul>
+                  ) : (
+                    <ul>
                       <li><Link to="/login">Логин</Link></li>
                       <li><Link to="/register">Регистрация</Link></li>
-                      <li><Link to="/profile">{ user }</Link></li>
-                  </ul>
+                    </ul>
+                  )}
               </nav>
           </div>
       </header>

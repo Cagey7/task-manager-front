@@ -13,8 +13,8 @@ function Task({ taskHeader, taskDesk, taskId, removeTask, addCompletedTask, task
                 <p className="user-task-desc">{taskDesk}</p>
                 {taskStatus === "in_process" ? (
                 <div className="task-buttons">
-                    <button class="complete-button" onClick={addCompletedTaskHandler}>Выполнено</button>
-                    <button class="delete-button" onClick={() => removeTask(taskId)}>Удалить</button>
+                    <button className="complete-button" onClick={addCompletedTaskHandler}>Выполнено</button>
+                    <button className="delete-button" onClick={() => removeTask(taskId)}>Удалить</button>
                 </div>
                 ) : (
                 ""
