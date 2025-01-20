@@ -6,7 +6,6 @@ import "./HomePage.css";
 
 function HomePage() {
   const [tasks, setTasks] = useState([]);
-  const [CompletedTask, setCompletedTask] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/tasks/", {
@@ -24,8 +23,10 @@ function HomePage() {
       .then((data) => {
         console.log(data);
         const newTasks = data.map((task) => ({
+          task_id: task.id,
           task_header: task.title,
           task_desk: task.desc,
+          completed: task.completed
         }));
         setTasks(newTasks);
       })
@@ -45,25 +46,49 @@ function HomePage() {
       }),
     })
     .then((response) => {
-      console.log(response)
+      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response.json();
     })
+    .then((data) => {
+      const task_id = data.id
+      setTasks([...tasks, { task_id, task_header, task_desk, completed: false }]);
+    })
     .catch((error) => console.error("Ошибка при запросе:", error));
-
-    setTasks([...tasks, { task_header, task_desk }]);
   }
 
-  function removeTask(i) {
-    const updatedTasks = [...tasks];
-    updatedTasks.splice(i, 1);
-    setTasks(updatedTasks);
+  function removeTask(id) {
+    fetch(`http://127.0.0.1:8000/delete-task/${id}/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      if (response.ok) {
+        setTasks(tasks.filter((task) => task.task_id !== id))
+      } else {
+        console.log('Ошибка удаления задачи:', response.status);
+      }
+    })
   }
 
-  function addCompletedTask(task_header, task_desk) {
-    setCompletedTask([...CompletedTask, { task_header, task_desk }]);
+  function addCompletedTask(id) {
+    fetch(`http://127.0.0.1:8000/complete-task/${id}/`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      setTasks(tasks.map((task) =>
+        task.task_id === id ? { ...task, completed: true } : task
+      ));
+    })
   }
 
   return (
@@ -71,26 +96,28 @@ function HomePage() {
       <>
         <NewTask addTask={addTask} />
         <div className="user-task-list">
-          {tasks.map((task, index) => (
+          {tasks.filter((task) => !(task.completed)).map((task) => (
             <Task
-              key={`task-${index}`}
-              taskId={index}
+              key={task.task_id}
+              taskId={task.task_id}
               taskHeader={task.task_header}
               taskDesk={task.task_desk}
               removeTask={removeTask}
               addCompletedTask={addCompletedTask}
-              taskStatus="in_process"
+              taskStatus={task.completed}
             />
           ))}
         </div>
         <h3 className="complete-task-header">Выполненные задания</h3>
         <div className="user-task-list">
-          {CompletedTask.map((task, index) => (
+          {tasks.filter((task) => task.completed).map((task) => (
             <Task
-              taskId={index}
+              key={task.task_id}
+              taskId={task.task_id}
               taskHeader={task.task_header}
               taskDesk={task.task_desk}
-              taskStatus="completed"
+              removeTask={removeTask}
+              taskStatus={task.completed}
             />
           ))}
         </div>

@@ -7,7 +7,7 @@ function NewTask({ addTask }) {
   const [error, setError] = useState(false);
 
   function addTaskHandler() {
-    if (inputHeader && inputDesk) {
+    if (inputHeader.trim() && inputDesk.trim()) {
       addTask(inputHeader, inputDesk);
       setInputHeader("");
       setInputDesk("");
