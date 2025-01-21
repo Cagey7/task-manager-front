@@ -25,6 +25,25 @@ function RegisterPage() {
                     setPassword("");
                     setPassword2("");
                     setError("");
+
+
+                    fetch("http://127.0.0.1:8000/auth/users/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            username: username,
+                            password: password
+                        })
+                    })
+                        .then((response) => {
+                            if (response.ok) {
+                                navigate("/login");
+                            }
+                        })
+                    
+
                 } else {
                     setError("Пароли отличаются");
                 }
@@ -35,18 +54,17 @@ function RegisterPage() {
     }
 
     return (
-        <>
+        <div className="register-block">
             <h2>Регистрация</h2>
-            <p>Имя пользователя</p>
-            <input onChange={e => setUsername(e.target.value)} value={username} onKeyDown={registerHandler} />
-            <p>Пароль</p>
-            <input type="password" onChange={e => setPassword(e.target.value)} value={password} onKeyDown={registerHandler} />
-            <p>Подтверждение пароль</p>
-            <input type="password" onChange={e => setPassword2(e.target.value)} value={password2} onKeyDown={registerHandler} />
-            <br />
-            <button onClick={registerHandler}>Зарегистрироваться</button>
+            <label htmlFor="name-input" className="label-input">Имя пользователя</label>
+            <input id="name-input" className="register-input" onChange={e => setUsername(e.target.value)} value={username} onKeyDown={registerHandler} />
+            <label htmlFor="password-input" className="label-input">Пароль</label>
+            <input className="register-input" type="password" onChange={e => setPassword(e.target.value)} value={password} onKeyDown={registerHandler} />
+            <label htmlFor="password-input" className="label-input">Подтвердите пароль</label>
+            <input className="register-input" type="password" onChange={e => setPassword2(e.target.value)} value={password2} onKeyDown={registerHandler} />
+            <button className="register-button" onClick={registerHandler}>Зарегистрироваться</button>
             <p>{error}</p>
-        </>
+        </div>
     )
 }
 

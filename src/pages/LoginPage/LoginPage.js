@@ -12,7 +12,7 @@ function LoginPage() {
     
     useEffect(() => {
         if (localStorage.getItem("token")) {
-            navigate("/");
+            navigate("/login");
         }
     }, [navigate])
 
@@ -32,15 +32,15 @@ function LoginPage() {
     }
 
     return (
-        <>
+        <div className="login-block">
             <h2>Логин</h2>
-            <p>Имя пользователя</p>
-            <input onChange={e => setUsername(e.target.value)} value={username} onKeyDown={loginHandler} />
-            <p>Пароль</p>
-            <input type="password" onChange={e => setPassword(e.target.value)} value={password} onKeyDown={loginHandler} />
-            <button onClick={loginHandler}>Войти</button>
+            <label htmlFor="name-input" className="label-input">Имя пользователя</label>
+            <input id="name-input" className="login-input" onChange={e => setUsername(e.target.value)} value={username} onKeyDown={loginHandler} />
+            <label htmlFor="password-input" className="label-input">Пароль</label>
+            <input className="login-input" type="password" onChange={e => setPassword(e.target.value)} value={password} onKeyDown={loginHandler} />
+            <button className="login-button" onClick={loginHandler}>Войти</button>
             <p>{error}</p>
-        </>
+        </div>
     )
 }
 

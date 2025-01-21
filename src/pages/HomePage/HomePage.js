@@ -93,8 +93,14 @@ function HomePage() {
 
   return (
     <AuthProvider>
-      <>
+      {localStorage.getItem("token") ? (
+        <>
         <NewTask addTask={addTask} />
+        {tasks.filter((task) => task.completed === false).length > 0 ? (
+          <h3 className="complete-task-header">Ваши актуальные задания</h3>
+        ): (
+          <h3 className="complete-task-header">У вас нет актуальных заданий</h3>
+        )}
         <div className="user-task-list">
           {tasks.filter((task) => !(task.completed)).map((task) => (
             <Task
@@ -108,7 +114,12 @@ function HomePage() {
             />
           ))}
         </div>
-        <h3 className="complete-task-header">Выполненные задания</h3>
+        {tasks.filter((task) => task.completed === true).length > 0 ? (
+          <h3 className="complete-task-header">Выполненные задания</h3>
+        ): (
+          ""
+        )}
+        
         <div className="user-task-list">
           {tasks.filter((task) => task.completed).map((task) => (
             <Task
@@ -122,6 +133,10 @@ function HomePage() {
           ))}
         </div>
       </>
+      ) : (
+        <h2>Войдите в аккаунт</h2>
+      )}
+
     </AuthProvider>
   );
 }

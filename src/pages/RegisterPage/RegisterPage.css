@@ -1,0 +1,40 @@
+.register-block {
+    width: 550px;
+    margin: 1.25rem auto; 
+    background-color: rgb(236, 241, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid rgb(160, 170, 199);
+    border-radius: 0.625rem;
+    padding: 1rem 0;
+}
+
+.register-button {
+    padding: 0.625rem 1.25rem;
+    background-color: #3697ff;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.register-input {
+    width: 70%;
+    height: 2rem;
+    padding: 0.625rem;
+    margin-bottom: 1rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+}
+
+.label-input{
+    width:70%;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
